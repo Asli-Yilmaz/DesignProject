@@ -20,7 +20,7 @@ public class PostgreSqlConnection {
 		}
 		
 	}
-	static ResultSet list(String query) {
+	static ResultSet listQuery(String query) {
 		try {
 			Statement st= conn.createStatement();
 			ResultSet rs= st.executeQuery(query);
