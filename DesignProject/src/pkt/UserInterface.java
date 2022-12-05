@@ -74,7 +74,7 @@ public class UserInterface extends JFrame {
 		splitPane.setContinuousLayout(true);
 		setTitle("News Archive");
 		setAlwaysOnTop(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\Desktop\\kitaplar\\News-icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon.png"));
 		getContentPane().setBackground(SystemColor.textInactiveText);
 		setBackground(new Color(255, 255, 255));
 		getContentPane().setLayout(null);
@@ -105,7 +105,7 @@ public class UserInterface extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("News Archive");
 		lblNewLabel_1.setForeground(SystemColor.window);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\Desktop\\kitaplar\\News-icon (1).png"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon(1).png"));
 		lblNewLabel_1.setBounds(20, 10, 233, 64);
 		getContentPane().add(lblNewLabel_1);
 		
