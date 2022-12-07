@@ -105,10 +105,16 @@ public class UserInterface extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("News Archive");
 		lblNewLabel_1.setForeground(SystemColor.window);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon(1).png"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon (1).png"));
 		lblNewLabel_1.setBounds(20, 10, 233, 64);
 		getContentPane().add(lblNewLabel_1);
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setBounds(20, 125, 869, 21);
+		
+	
 		 
 		PostgreSqlConnection.connect();
 		
@@ -119,42 +125,47 @@ public class UserInterface extends JFrame {
 
 				String wanted=textArea.getText();
 				sorgu="select author, dates, title, newscontent\r\n"
-						+ "from haber where document_vectors @@ plainto_tsquery( '"+wanted+"')\r\n"
+						+ "from News where document_vectors @@ plainto_tsquery( '"+wanted+"')\r\n"
 						+ "order by ts_rank( document_vectors, plainto_tsquery( '"+wanted+"')) desc;";
-				model.setColumnCount(0);
-				model.setRowCount(0);
-				model.setColumnIdentifiers(columns);
-				
+								
 				ResultSet rs=PostgreSqlConnection.listQuery(sorgu);
 				 
 				try {
 					if(rs.next()==false){
 						sorgu1= "select author, dates, title, newscontent\r\n"
-								+ "from haber where document_vectors @@ to_tsquery( '"+wanted+":*')\r\n"
+								+ "from News where document_vectors @@ to_tsquery( '"+wanted+":*')\r\n"
 								+ "order by ts_rank( document_vectors, to_tsquery( '"+wanted+":*')) desc;";
 						rs=PostgreSqlConnection.listQuery(sorgu1);
-						
 					}
+					
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					
 				}
 				try {
-					while(rs.next()) {
-						rows[0]=rs.getString("author");
-						rows[1]=rs.getString("dates");
-						rows[2]=rs.getString("title");
-						rows[3]=rs.getString("newscontent");
-						model.addRow(rows);
-						
+					model.setColumnCount(0);
+					model.setRowCount(0);
+					model.setColumnIdentifiers(columns);
+					if(rs.next()==true) {	
+						while(rs.next()) {
+							rows[0]=rs.getString("author");
+							rows[1]=rs.getString("dates");
+							rows[2]=rs.getString("title");
+							rows[3]=rs.getString("newscontent");
+							model.addRow(rows);								
+						}	
+						table_1.setModel(model);
 					}
-					table_1.setModel(model);
+					else {
+						lblNewLabel.setText("sonuc bulunamadı.");
+						getContentPane().add(lblNewLabel);
+					}
+				} catch (SQLException e1) {
 					
 					
-				} catch (SQLException error) {
-					// TODO Auto-generated catch block
-					error.printStackTrace();
 				}
+									
+				
 			}
 		});
 		
