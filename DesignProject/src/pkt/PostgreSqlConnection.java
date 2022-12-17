@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PostgreSqlConnection {
-	static String url= "jdbc:postgresql://localhost:5432/NewsDb";
+	static String url= "jdbc:postgresql://localhost:5432/AmazonDb";
 	static Connection conn=null;
 	static void connect()
 	{

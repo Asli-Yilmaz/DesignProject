@@ -35,7 +35,7 @@ public class UserInterface extends JFrame {
 	String sorgu;
 	String sorgu1;
 	DefaultTableModel model=new DefaultTableModel();
-	Object[] columns= {"Author","Publish Date","Title","Content"};
+	Object[] columns= {"Category","Product Name","About Product","Price ($)"};
 	Object[] rows= new Object[4];
 	/**
 	 * @wbp.nonvisual location=-50,34
@@ -72,10 +72,10 @@ public class UserInterface extends JFrame {
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setBackground(SystemColor.text);
 		splitPane.setContinuousLayout(true);
-		setTitle("News Archive");
+		setTitle("Amazon Products");
 		setAlwaysOnTop(true);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon.png"));
-		getContentPane().setBackground(SystemColor.textInactiveText);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\amazon-store-icon.png"));
+		getContentPane().setBackground(SystemColor.activeCaption);
 		setBackground(new Color(255, 255, 255));
 		getContentPane().setLayout(null);
 		
@@ -97,21 +97,22 @@ public class UserInterface extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
+		table_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		table_1.setFillsViewportHeight(true);
 		table_1.setCellSelectionEnabled(true);
 		table_1.setColumnSelectionAllowed(true);
 		scrollPane.setViewportView(table_1);
 		
-		JLabel lblNewLabel_1 = new JLabel("News Archive");
+		JLabel lblNewLabel_1 = new JLabel("Amazon Products");
 		lblNewLabel_1.setForeground(SystemColor.window);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\News-icon (1).png"));
-		lblNewLabel_1.setBounds(20, 10, 233, 64);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\amazon-store-icon.png"));
+		lblNewLabel_1.setBounds(10, 0, 286, 84);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(20, 125, 869, 21);
 		
 	
@@ -122,56 +123,41 @@ public class UserInterface extends JFrame {
 			@Override
 			
 			public void mouseClicked(MouseEvent e) {
-
+				lblNewLabel.setText("");
 				String wanted=textArea.getText();
-				sorgu="select author, dates, title, newscontent\r\n"
-						+ "from News where document_vectors @@ plainto_tsquery( '"+wanted+"')\r\n"
-						+ "order by ts_rank( document_vectors, plainto_tsquery( '"+wanted+"')) desc;";
+				sorgu="SELECT category, product_name,about_product, price FROM searching WHERE searching_item @@ plainto_tsquery( '"+wanted+"')"
+						+ "order by ts_rank( searching_item, plainto_tsquery( '"+wanted+"')) desc;";
 								
 				ResultSet rs=PostgreSqlConnection.listQuery(sorgu);
 				 
 				try {
-					if(rs.next()==false){
-						sorgu1= "select author, dates, title, newscontent\r\n"
-								+ "from News where document_vectors @@ to_tsquery( '"+wanted+":*')\r\n"
-								+ "order by ts_rank( document_vectors, to_tsquery( '"+wanted+":*')) desc;";
-						rs=PostgreSqlConnection.listQuery(sorgu1);
-					}
-					
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-					
-				}
-				try {
 					model.setColumnCount(0);
 					model.setRowCount(0);
 					model.setColumnIdentifiers(columns);
-					if(rs.next()==true) {	
-						while(rs.next()) {
-							rows[0]=rs.getString("author");
-							rows[1]=rs.getString("dates");
-							rows[2]=rs.getString("title");
-							rows[3]=rs.getString("newscontent");
+					if(rs.next()==false) {lblNewLabel.setText("Uygun Sonuc Bulunamadı.");getContentPane().add(lblNewLabel);}
+					else {
+						do{
+							rows[0]=rs.getString("category");
+							rows[1]=rs.getString("product_name");
+							rows[2]=rs.getString("about_product");
+							rows[3]=rs.getString("price");
 							model.addRow(rows);								
-						}	
+						}while(rs.next()==true);
 						table_1.setModel(model);
 					}
-					else {
-						lblNewLabel.setText("sonuc bulunamadı.");
-						getContentPane().add(lblNewLabel);
-					}
-				} catch (SQLException e1) {
-					
-					
+				}catch (Exception e2) {
+					// TODO: handle exception
 				}
-									
-				
 			}
 		});
+	}
+}
+						
+			
+		
 		
 		
 	
 		
 		
-	}
-}
+
