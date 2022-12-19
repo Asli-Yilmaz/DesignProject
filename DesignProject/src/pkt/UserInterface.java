@@ -35,7 +35,7 @@ public class UserInterface extends JFrame {
 	String sorgu;
 	String sorgu1;
 	DefaultTableModel model=new DefaultTableModel();
-	Object[] columns= {"Category","Product Name","About Product","Price ($)"};
+	Object[] columns= {"Category","Product Name","About Product","Price"};
 	Object[] rows= new Object[4];
 	/**
 	 * @wbp.nonvisual location=-50,34
