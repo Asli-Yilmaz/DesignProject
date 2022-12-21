@@ -15,10 +15,9 @@ public class PostgreSqlConnection {
 			conn= DriverManager.getConnection(url,"postgres","12345");
 			System.out.println("Connected Successfully.");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	static ResultSet listQuery(String query) {
 		try {
@@ -28,8 +27,7 @@ public class PostgreSqlConnection {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
-		}
-		
+		}	
 		
 	}
 }

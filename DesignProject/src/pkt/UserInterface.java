@@ -32,11 +32,11 @@ import java.awt.Window.Type;
 import javax.swing.ScrollPaneConstants;
 
 public class UserInterface extends JFrame {
-	String sorgu;
-	String sorgu1;
+	String query;
+	
 	DefaultTableModel model=new DefaultTableModel();
-	Object[] columns= {"Category","Product Name","About Product","Price"};
-	Object[] rows= new Object[4];
+	Object[] columns= {"Category","Product Name","About Product","Price","Poduct URL"};
+	Object[] rows= new Object[5];
 	/**
 	 * @wbp.nonvisual location=-50,34
 	 */
@@ -115,8 +115,6 @@ public class UserInterface extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(20, 125, 869, 21);
 		
-	
-		 
 		PostgreSqlConnection.connect();
 		
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -125,22 +123,23 @@ public class UserInterface extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblNewLabel.setText("");
 				String wanted=textArea.getText();
-				sorgu="SELECT category, product_name,about_product, price FROM searching WHERE searching_item @@ plainto_tsquery( '"+wanted+"')"
+				query="SELECT category, product_name,about_product, price,url FROM searching WHERE searching_item @@ plainto_tsquery( '"+wanted+"')"
 						+ "order by ts_rank( searching_item, plainto_tsquery( '"+wanted+"')) desc;";
 								
-				ResultSet rs=PostgreSqlConnection.listQuery(sorgu);
+				ResultSet rs=PostgreSqlConnection.listQuery(query);
 				 
 				try {
 					model.setColumnCount(0);
 					model.setRowCount(0);
 					model.setColumnIdentifiers(columns);
-					if(rs.next()==false) {lblNewLabel.setText("Uygun Sonuc Bulunamadı.");getContentPane().add(lblNewLabel);}
+					if(rs.next()==false) {lblNewLabel.setText("Could not found any results for "+wanted+".");getContentPane().add(lblNewLabel);}
 					else {
 						do{
 							rows[0]=rs.getString("category");
 							rows[1]=rs.getString("product_name");
 							rows[2]=rs.getString("about_product");
 							rows[3]=rs.getString("price");
+							rows[4]=rs.getString("url");
 							model.addRow(rows);								
 						}while(rs.next()==true);
 						table_1.setModel(model);
