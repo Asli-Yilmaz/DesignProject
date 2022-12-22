@@ -42,7 +42,6 @@ public class UserInterface extends JFrame {
 	 */
 	private final JSplitPane splitPane = new JSplitPane();
 	private JTextField textField;
-	private JTable table;
 	private JTable table_1;
 	
 	/**
