@@ -3,10 +3,18 @@
 ## About Project:
 Using full-text search techniques on PostgreSQL and creating a user interface with Java to do the searching process.
 
-### I used;  
-+ PostgreSQL 
-+ Java / Eclipse IDE
-+ Amazon Product Dataset 2020 (https://www.kaggle.com/datasets/promptcloud/amazon-product-dataset-2020)
+##Tools/Concepts/Techniques:
+
++ Java
++ Java Swing
++ PostgreSQL
++ JDBC
+
+##Software/Platforms:
+
++ ECLIPSE IDE
++ Valentina Studio
++ darw.io
 
 ## Entity diagram of the database
 
