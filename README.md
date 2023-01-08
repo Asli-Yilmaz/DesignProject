@@ -18,3 +18,4 @@ Using full-text search techniques on PostgreSQL and creating a user interface wi
 
 ## Entity diagram of the database
 
+DesignProject/images/varlıkBagıntıDiyagrami.drawio.png
