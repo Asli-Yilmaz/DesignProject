@@ -74,25 +74,25 @@ public class UserInterface extends JFrame {
 		setTitle("Amazon Products");
 		setAlwaysOnTop(true);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\amazon-store-icon.png"));
-		getContentPane().setBackground(SystemColor.activeCaption);
+		getContentPane().setBackground(new Color(112, 128, 144));
 		setBackground(new Color(255, 255, 255));
 		getContentPane().setLayout(null);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textArea.setBackground(Color.WHITE);
-		textArea.setBounds(20, 94, 1175, 21);
+		textArea.setBounds(20, 94, 1147, 21);
 		getContentPane().add(textArea);
 		
 		JButton btnNewButton = new JButton("Search");
 		btnNewButton.setBackground(SystemColor.window);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnNewButton.setBounds(1205, 93, 96, 22);
+		btnNewButton.setBounds(1177, 95, 96, 22);
 		getContentPane().add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(20, 150, 1281, 349);
+		scrollPane.setBounds(20, 150, 1253, 349);
 		getContentPane().add(scrollPane);
 		
 		table_1 = new JTable();
@@ -105,7 +105,7 @@ public class UserInterface extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Amazon Products");
 		lblNewLabel_1.setForeground(SystemColor.window);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\icon\\amazon-store-icon.png"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\ADMIN\\DesignProject\\DesignProject\\images\\amazon-store-icon.png"));
 		lblNewLabel_1.setBounds(10, 0, 286, 84);
 		getContentPane().add(lblNewLabel_1);
 		
