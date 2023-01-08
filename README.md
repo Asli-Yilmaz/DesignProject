@@ -18,4 +18,4 @@ Using full-text search techniques on PostgreSQL and creating a user interface wi
 
 ## Entity diagram of the database
 
-https://github.com/Asli-Yilmaz/DesignProject/blob/40ae4fb9bb46aa142fa53c2b27edbbc2436f070e/DesignProject/images/varl%C4%B1kBag%C4%B1nt%C4%B1Diyagrami.drawio.png
+![varlikBagintiDiayagrami.drawio.png] (https://github.com/Asli-Yilmaz/DesignProject/blob/40ae4fb9bb46aa142fa53c2b27edbbc2436f070e/DesignProject/images/varl%C4%B1kBag%C4%B1nt%C4%B1Diyagrami.drawio.png)
